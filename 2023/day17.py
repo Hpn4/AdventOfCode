@@ -37,9 +37,9 @@ def solve(part1):
 			if 0 <= x2 < w and 0 <= y2 < h and valid:
 				cost = d + lines[y2][x2]
 				if x == w - 1 and y == h - 1:
-					ans = min(ans, d)
-				else:
-					heapq.heappush(Q, (cost, x2, y2, i, new_indir))
+					return d
+				
+				heapq.heappush(Q, (cost, x2, y2, i, new_indir))
 
 	return ans
 
