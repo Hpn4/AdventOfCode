@@ -1,28 +1,20 @@
 import sys
+import helper
 
-lines = open(sys.argv[1], "r").readlines()
-lines = [[c for c in line.strip()] for line in lines]
+lines, h, w = helper.read(sys.argv[1], lines=True)
 
-h = len(lines)
-w = len(lines[0])
-
-start = 0
-for y in range(h):
-	for x in range(w):
-		if lines[y][x] == "S":
-			start = (x, y)
+start = helper.findGrid(lines, "S")
 
 def run(pos, prec, steps):
 	for i in range(prec, steps):
 		moved = set()
 
 		for x,y in pos:
-			for accX, accY in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
-				x1 = x + accX
-				y1 = y + accY
-
+			def f(x1, y1):
 				if lines[y1 % h][x1 % w] != '#':
 					moved.add((x1, y1))
+
+			helper.doEachDir(lines, x, y, f, check=False)
 
 		pos = moved
 
@@ -42,26 +34,7 @@ def black_magic(n):
 	s2 = run(s1, s + w, s + w * 2)
 	a2 = len(s2)
 
-	# Find poly: ax² + bx + c
-	# Write down formula:
-	# a0 = 0² + b * 0 + c
-	# a1 = a + b + c
-	# a2 = 4a + 2b + c
-	#
-	# Substract
-	# a2 - 2a1 = 2a - c
-	#
-	# So:
-	# c = a0
-	# a = (a2 - 2a1 + c) / 2
-	# b = a1 - a - c
-
-	c = a0
-	a = (a2 - 2 * a1 + c) // 2
-	b = a1 - a - c
-
-	# Construct poly and then evaluate
-	return a * n * n + b * n + c
+	return round(helper.interp([0, 1, 2], [a0, a1, a2], n))
 
 print("Part1:", len(run(pos, 0, 64)))
 print("Part2:", black_magic(26501365//w))

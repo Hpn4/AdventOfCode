@@ -1,15 +1,16 @@
 import sys
 from collections import deque
 from math import lcm
+import helper
 
-lines = open(sys.argv[1], "r").readlines()
+lines, _, _ = helper.read(sys.argv[1], lines=True)
 
 # Modules name: (name, code, state, el)
 M = {}
 
 ## Parsing
 for line in lines:
-	name, l = line.strip().split(" -> ")
+	name, l = line.split(" -> ")
 	el = l.split(", ")
 
 	if line.startswith("broadcaster"):
@@ -113,4 +114,4 @@ for i in range(1000000):
 			conjunction(module, pulse, pulses)
 
 	if i == 1000 - 1:
-		print("Part1:", events[0] * events[1])
+		print("Part1:", helper.prod(events))
