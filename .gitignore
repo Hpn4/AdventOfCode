@@ -1,3 +1,6 @@
 input*.txt
 ex*.txt
 cookie.txt
+lib/*
+test2023
+*/get.sh

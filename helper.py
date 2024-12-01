@@ -2,6 +2,8 @@ import sys
 import math
 import numpy as np
 
+d_letters = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+
 # grid
 # gridint
 # lines
