@@ -1,8 +1,10 @@
 import sys
 import math
-import numpy as np
+# import numpy as np
 
 d_letters = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+
+DIAG_DIRS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
 
 # grid
 # gridint
@@ -80,3 +82,9 @@ def area(points):
 # sympy Line2D, Line3D for intersection, parallel...
 
 # networkx, igraph: 
+
+# regex: re,
+# re.findall(r'([0-9]+),([0-9]+)|(do)\(\)', 'do() 12,3')
+# output [('', '', 'do'), ('12', '3', '')]
+# https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
+# https://regexcrossword.com/
