@@ -4,6 +4,7 @@ import math
 
 d_letters = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
+DIRS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 DIAG_DIRS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
 
 # grid
@@ -74,6 +75,31 @@ def area(points):
 	pass
 	# area += (x + prevX) * (y - prevY)
 	# abs(area // 2) + p//2 + 1
+
+def grid_iterator(grid, x, y, step=1, diag=False, acc=False):
+	d = DIAG_DIRS if diag else DIRS
+
+	for dx, dy in d:
+		cumul = []
+		for i in range(step):
+			xx = x + dx * i
+			yy = y + dy * i
+
+			if xx < 0 or yy < 0 or xx >= len(grid[0]) or yy >= len(grid):
+				break
+
+			if acc:
+				cumul.append((xx, yy))
+			else:
+				yield (xx, yy)
+
+		if acc:
+			yield cumul
+
+class GridIterator:
+	def __init__(self, grid, x, y, steps=1, diag=False):
+		self.grid = grid
+
 
 # Z3 equation solver:
 # x = Int('x'); s = Solver(); s.add(x > 3); s.check(); s.model()

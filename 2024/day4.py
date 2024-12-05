@@ -1,4 +1,4 @@
-from helper import DIAG_DIRS
+from helper import grid_iterator
 
 lines = open(0, "r").readlines()
 
@@ -7,20 +7,14 @@ acc2 = 0
 
 def xmas(x, y, lines):
 	c = 0
-	for dx, dy in DIAG_DIRS:
+
+	for acc in grid_iterator(lines, x, y, step=4, acc=True, diag=True):
 		p = ""
-		
-		for i in range(4):
-			xx = x + dx * i
-			yy = y + dy * i
 
-			if xx < 0 or yy < 0 or xx >= len(lines[0]) or yy >= len(lines):
-				break
-
+		for xx, yy in acc:
 			p += lines[yy][xx]
 
-		if p == "XMAS":
-			c += 1
+		c += p == "XMAS"
 
 	return c
 
