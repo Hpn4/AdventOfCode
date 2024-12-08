@@ -10,7 +10,7 @@ s_x, s_y = findGrid(lines, '^')
 def run(x, y, lines):
 	d = 3
 	pos = defaultdict(int)
-	pos[(x, y)] = 1
+	pos[(x, y)] = d
 	while True:
 		xx = x + DIRS[d][0]
 		yy = y + DIRS[d][1]
@@ -25,10 +25,10 @@ def run(x, y, lines):
 			y = yy
 
 			key = (xx, yy)
-			pos[key] += 1
-
-			if pos[key] >= 5:
+			if key in pos and pos[key] == d:
 				return -1, None
+			else:
+				pos[key] = d
 
 acc, pos = run(s_x, s_y, lines)
 
