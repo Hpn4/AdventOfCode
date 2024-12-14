@@ -1,5 +1,3 @@
-from collections import defaultdict
-from helper import DIRS
 import numpy as np
 
 # Can use Z3 also instead of cramer
