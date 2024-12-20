@@ -1,5 +1,4 @@
 import sys
-from collections import defaultdict
 
 lines = open(sys.argv[1], "r").readlines()
 
@@ -10,30 +9,28 @@ for p in lines[0].split(","):
 	max_len = max(max_len, len(p))
 	patterns.add(p)
 
-def solve(SEEN, c, s, path, paths):
-	if s == c:
-		if tuple(path) in paths:
-			return 0
-		paths.add(tuple(path))
+SEEN = {}
+def solve(s):
+	if not s:
 		return 1
 
-	if c in SEEN:
-		return SEEN[c]
+	if s in SEEN:
+		return SEEN[s]
 
 	good = 0
-	for i in range(1, max_len + 1):
-		p = s[len(c):len(c) + i]
+	for i in range(1, min(max_len, len(s)) + 1):
+		p = s[:i]
 		if p in patterns:
-			good += solve(SEEN, c + p, s, path + [p], paths)
+			good += solve(s[i:])
 
-	SEEN[c] += good
+	SEEN[s] = good
 
 	return good			
 
 acc = 0
 acc2 = 0
 for line in lines[2:]:
-	res = solve(defaultdict(int), "", line.strip(), [], set())
+	res = solve(line.strip())
 	if res:
 		acc += 1
 		acc2 += res
