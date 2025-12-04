@@ -2,5 +2,7 @@ input*.txt
 ex*.txt
 cookie.txt
 lib/*
+env
+__pycache__
 test2023
 */get.sh
