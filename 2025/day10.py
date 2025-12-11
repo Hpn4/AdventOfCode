@@ -16,9 +16,11 @@ for line in lines:
 	li = [0 if x == "." else 1 for x in li[1:]]
 	li = np.array(li)
 
+	# Buttons
 	but, re = re.split("{")
 	but = [[int(x) for x in b[1:-1].split(",")] for b in but.split()]
 
+	# Jolt
 	jolt = [int(x) for x in re[:-1].split(",")]
 
 	mach.append((li, but, jolt))
